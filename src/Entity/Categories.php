@@ -2,11 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CatégoriesRepository;
+use App\Repository\CategoriesRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: CatégoriesRepository::class)]
-class Catégories
+#[ORM\Entity(repositoryClass: CategoriesRepository::class)]
+class Categories
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -14,6 +15,7 @@ class Catégories
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\Length(min:2, max:50)]
     private ?string $name = null;
 
     public function getId(): ?int

@@ -2,7 +2,8 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Cours;
+use App\Entity\Produits;
+use App\Entity\Categories;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -19,10 +20,22 @@ class AppFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         for ($i=0; $i <= 20; $i++) { 
-            // $cours = new Cours();
-            // $cours->setName($this->faker->word());      
-            
-            // $manager->persist($cours);
+
+                $produits = new Produits();
+                $produits->setName($this->faker->word());    
+                $produits->setPrix(mt_rand(0, 100));  
+                $produits->setDescription($this->faker->word(15));  
+                $produits->setCategorie($this->faker->word(15));  
+                
+                
+             
+
+                $categories = new Categories();
+                $categories->setName($this->faker->word());
+
+
+                $manager->persist($produits);
+                $manager->persist($categories);
         }
 
         

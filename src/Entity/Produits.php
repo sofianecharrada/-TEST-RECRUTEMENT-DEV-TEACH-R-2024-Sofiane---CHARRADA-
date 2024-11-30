@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\ProduitsRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -30,11 +31,16 @@ class Produits
 
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:2, max:25)]
-    private ?string $categories = null;
+    private ?string $categorie = null;
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?\DateTimeImmutable $creerLe = null;
+
+    public function __construct()
+    {
+        $this->creerLe = new  DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {
@@ -77,26 +83,26 @@ class Produits
         return $this;
     }
 
-    public function getCategories(): ?string
+    public function getCategorie(): ?string
     {
-        return $this->categories;
+        return $this->categorie;
     }
 
-    public function setCategories(string $categories): static
+    public function setCategorie(string $categorie): static
     {
-        $this->categories = $categories;
+        $this->categorie = $categorie;
 
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreerLe(): ?\DateTimeImmutable
     {
-        return $this->createdAt;
+        return $this->creerLe;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): static
+    public function setCreerLe(\DateTimeImmutable $creerLe): static
     {
-        $this->createdAt = $createdAt;
+        $this->creerLe = $creerLe;
 
         return $this;
     }
