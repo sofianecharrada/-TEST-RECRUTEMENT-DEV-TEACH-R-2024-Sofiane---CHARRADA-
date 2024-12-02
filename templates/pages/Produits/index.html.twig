@@ -1,30 +1,24 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Mes Produits {% endblock %}
+{% block title %}Mes Produits
+{% endblock %}
+
 
 {% block body %}
-    <div class="container mt-4">
-        <h1>Mes Produits</h1>
+	
+		<div class="container mt-4">
+			<h1>
+				Mes Produits
+			</h1>
 
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                <th scope="col">Numéro</th>
-                <th scope="col">Nom</th>
-                <th scope="col">Column heading</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for cours in cours %}
-                    <div>
-                    <tr class="table-primary">
-                            <th scope="row">{{ cours.id }}</th>
-                            <td>{{cours.name }}</td>
-                            <td>{{cours.createdAt|date('d/m/Y') }}</td>
-                        </tr>
-                    </div>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            <div class="count mt-4"> 
+            </div>
+
+			{% for produit in produits %}
+				<div>
+					<p>{{ produit.name}}</p>
+
+				{% endfor %}
+			</div>
+    <h4> Il n'y a pas de produits </h4>
 {% endblock %}
