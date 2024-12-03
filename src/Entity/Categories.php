@@ -3,10 +3,15 @@
 namespace App\Entity;
 
 use App\Repository\CategoriesRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 #[ORM\Entity(repositoryClass: CategoriesRepository::class)]
+#[UniqueEntity('name')]
 class Categories
 {
     #[ORM\Id]
@@ -17,6 +22,14 @@ class Categories
     #[ORM\Column(length: 255)]
     #[Assert\Length(min:2, max:50)]
     private ?string $name = null;
+
+    #[ORM\OneToMany(targetEntity: Produits::class, mappedBy:"categorie")]
+    private $produits;
+
+    public function __construct()
+    {
+        $this->produits = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -34,4 +47,10 @@ class Categories
 
         return $this;
     }
+
+    public function getProduits(): Collection
+    {
+        return $this->produits;
+    }
+
 }

@@ -11,35 +11,39 @@ use Faker\Generator;
 
 class AppFixtures extends Fixture
 {
-    private Generator $faker ;
+    private Generator $faker;
 
     public function __construct()
-    {   
+    {
         $this->faker = Factory::create('fr_FR');
     }
-    public function load(ObjectManager $manager): void
+    public function load(ObjectManager $manager)
     {
-        for ($i=0; $i <= 20; $i++) { 
+        $faker = Factory::create();
 
-                $produits = new Produits();
-                $produits->setName($this->faker->word());    
-                $produits->setPrix(mt_rand(0, 100));  
-                $produits->setDescription($this->faker->word(15));  
-                $produits->setCategorie($this->faker->word(15));  
-                
-                
-             
+        // Création de 5 catégories
+        for ($i = 0; $i < 5; $i++) {
+            $categorie = new Categories();
+            $categorie->setName($faker->word);
 
-                $categories = new Categories();
-                $categories->setName($this->faker->word());
+            $manager->persist($categorie);
 
+            // Création de 3 produits pour chaque catégorie
+            for ($j = 0; $j < 3; $j++) {
+                $produit = new Produits();
+                $produit->setName($faker->word)
+                        ->setDescription($faker->sentence)
+                        ->setPrix($faker->randomFloat(2, 5, 100))
+                        ->setCategorie($categorie);  // Associer le produit à la catégorie
 
-                $manager->persist($produits);
-                $manager->persist($categories);
+                $manager->persist($produit);
+            }
         }
-
-        
 
         $manager->flush();
     }
+        
+
+      
+    
 }

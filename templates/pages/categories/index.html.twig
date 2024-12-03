@@ -1,7 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block title %} Mes Catégories {% endblock %}
+{% block title %}Mes Catégories
+{% endblock %}
+
 
 {% block body %}
 
+	<div class="container mt-4">
+		<h1>
+			Mes Catégories
+		</h1>
+
+		<a href="{{ path('categories.new') }}" class="btn btn-primary">
+			Creer une catégorie
+		</a>
+
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th scope"col">Numéro</th>
+					<th scope"col">Nom</th>
+					<th scope"col">Edition</th>
+					<th scope"col">Suppression</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for categorie in categories %}
+					<tr class="table-primary">
+						<th scope="row">{{ categorie.id }}</th>
+						<td>{{ categorie.name}}</td>
+						<td>
+							<a href="{{ path('categories.edit', { id: categorie.id }) }}" class="btn btn-info">
+								Modifier</a>
+						</td>
+						<td>
+							<a href="{{ path('categories.delete', { id: categorie.id }) }}" class="btn btn-warning">
+								Supprimer</a>
+						</td>
+
+
+					</tr>
+
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
 {% endblock %}

@@ -7,12 +7,12 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Catégories>
+ * @extends ServiceEntityRepository<Categories>
  *
- * @method Catégories|null find($id, $lockMode = null, $lockVersion = null)
- * @method Catégories|null findOneBy(array $criteria, array $orderBy = null)
- * @method Catégories[]    findAll()
- * @method Catégories[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Categories|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Categories|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Categories[]    findAll()
+ * @method Categories[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
 class CategoriesRepository extends ServiceEntityRepository
 {
@@ -22,7 +22,7 @@ class CategoriesRepository extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Catégories[] Returns an array of Catégories objects
+//     * @return Categories[] Returns an array of Categories objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -36,7 +36,7 @@ class CategoriesRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Catégories
+//    public function findOneBySomeField($value): ?Categories
 //    {
 //        return $this->createQueryBuilder('c')
 //            ->andWhere('c.exampleField = :val')

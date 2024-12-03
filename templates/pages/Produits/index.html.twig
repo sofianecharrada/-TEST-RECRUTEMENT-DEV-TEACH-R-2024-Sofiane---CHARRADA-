@@ -22,6 +22,7 @@
 					<th scope"col">Nom</th>
 					<th scope"col">Prix</th>
 					<th scope"col">Description</th>
+					<th scope"col">Catégorie</th>
 					<th scope"col">Date de création</th>
 					<th scope"col">Edition</th>
 					<th scope"col">Suppression</th>
@@ -34,10 +35,16 @@
 						<td>{{ produit.name}}</td>
 						<td>{{ produit.prix}}</td>
 						<td>{{ produit.Description}}</td>
-						<td>{{ produit.categorie}}</td>
+						<td>{{ produit.categorie.id }}</td>
 						<td>{{ produit.creerLe|date("d/m/y")}}</td>
-						<td><a href="{{ path('produits.edit', { id: produit.id }) }}" class="btn btn-info"> Modifier</a></td>
-						<td><a href="{{ path('produits.delete', { id: produit.id }) }}" class="btn btn-warning"> Supprimer</a></td>
+						<td>
+							<a href="{{ path('produits.edit', { id: produit.id }) }}" class="btn btn-info">
+								Modifier</a>
+						</td>
+						<td>
+							<a href="{{ path('produits.delete', { id: produit.id }) }}" class="btn btn-warning">
+								Supprimer</a>
+						</td>
 
 
 					</tr>
