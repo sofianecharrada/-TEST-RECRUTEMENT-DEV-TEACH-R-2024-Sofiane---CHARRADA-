@@ -3,54 +3,67 @@
 {% block title %}Mes Produits
 {% endblock %}
 
-
 {% block body %}
+	<section class="py-5 bg-light">
+		<div class="container">
+			<div class="text-center mb-5">
+				<h1 class="display-5 fw-bold text-dark">Mes Produits</h1>
+				<p class="text-muted">
+					Gérez vos produits de manière simple et intuitive. Ajoutez, modifiez ou supprimez-les en quelques clics.
+				</p>
+				<a href="{{ path('produits.new') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
+					<i class="fas fa-plus-circle me-2"></i>Créer un produit
+				</a>
+			</div>
 
-	<div class="container mt-4">
-		<h1>
-			Mes Produits
-		</h1>
-
-		<a href="{{ path('produits.new') }}" class="btn btn-primary">
-			Creer un produit
-		</a>
-
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th scope"col">Numéro</th>
-					<th scope"col">Nom</th>
-					<th scope"col">Prix</th>
-					<th scope"col">Description</th>
-					<th scope"col">Catégorie</th>
-					<th scope"col">Date de création</th>
-					<th scope"col">Edition</th>
-					<th scope"col">Suppression</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for produit in produits %}
-					<tr class="table-primary">
-						<th scope="row">{{ produit.id }}</th>
-						<td>{{ produit.name}}</td>
-						<td>{{ produit.prix}}</td>
-						<td>{{ produit.Description}}</td>
-						<td>{{ produit.categorie.id }}</td>
-						<td>{{ produit.creerLe|date("d/m/y")}}</td>
-						<td>
-							<a href="{{ path('produits.edit', { id: produit.id }) }}" class="btn btn-info">
-								Modifier</a>
-						</td>
-						<td>
-							<a href="{{ path('produits.delete', { id: produit.id }) }}" class="btn btn-warning">
-								Supprimer</a>
-						</td>
-
-
-					</tr>
-
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
+			<div class="card shadow-sm border-0">
+				<div class="card-body p-4">
+					<div class="table-responsive">
+						<table class="table align-middle text-center">
+							<thead class="table-dark">
+								<tr>
+									<th scope="col">#</th>
+									<th scope="col">Nom</th>
+									<th scope="col">Prix</th>
+									<th scope="col">Description</th>
+									<th scope="col">Catégorie</th>
+									<th scope="col">Date de création</th>
+									<th scope="col">Édition</th>
+									<th scope="col">Suppression</th>
+								</tr>
+							</thead>
+							<tbody>
+								{% for produit in produits %}
+									<tr>
+										<td class="fw-bold">{{ produit.id }}</td>
+										<td>{{ produit.name }}</td>
+										<td>{{ produit.prix }}</td>
+										<td>{{ produit.Description }}</td>
+										<td>{{ produit.categorie.id }}</td>
+										<td>{{ produit.creerLe|date("d/m/Y") }}</td>
+										<td>
+											<a href="{{ path('produits.edit', { id: produit.id }) }}" class="btn btn-outline-info btn-sm">
+												<i class="fas fa-pen"></i>
+												Modifier
+											</a>
+										</td>
+										<td>
+											<a href="{{ path('produits.delete', { id: produit.id }) }}" class="btn btn-outline-danger btn-sm">
+												<i class="fas fa-trash"></i>
+												Supprimer
+											</a>
+										</td>
+									</tr>
+								{% else %}
+									<tr>
+										<td colspan="4" class="text-muted fst-italic">Aucune catégorie disponible pour le moment.</td>
+									</tr>
+								{% endfor %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
 {% endblock %}

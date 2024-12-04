@@ -7,12 +7,43 @@ use App\Form\CategoriesType;
 use App\Repository\CategoriesRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 class CategoriesController extends AbstractController
 {
+    
+//    /**
+//      * Cette méthode expose toutes les catégories au format JSON.
+//      *
+//      * @param CategoriesRepository $categoriesRepository
+//      * @return JsonResponse
+//      */
+//     #[Route('/categories/total', name: 'categories.total', methods: ['GET'])]
+//     public function total(CategoriesRepository $categoriesRepository): JsonResponse
+//     {
+//         // Récupération de toutes les catégories
+//         $categories = $categoriesRepository->findAll();
+
+//         // Création du tableau des catégories
+//         $categoriesArray = [];
+//         foreach ($categories as $categorie) {
+//             $categoriesArray[] = [
+//                 'id' => $categorie->getId(),    // Assurez-vous que la méthode getId() existe
+//                 'name' => $categorie->getName(), // Assurez-vous que la méthode getName() existe
+//             ];
+//         }
+
+//         // Retourne les catégories sous forme de réponse JSON
+//         return $this->json($categoriesArray);
+//     }
+
+
+
+
+
     /**
      * This controller display all products
      *
@@ -23,7 +54,7 @@ class CategoriesController extends AbstractController
     public function index(CategoriesRepository $repository): Response
     {
         return $this->render('pages/categories/index.html.twig', [
-             'categories' => $repository->findAll()
+            'categories' => $repository->findAll()
         ]);
     }
 
@@ -69,8 +100,7 @@ class CategoriesController extends AbstractController
         int $id,
         Request $request,
         EntityManagerInterface $manager
-        ): Response
-    {
+    ): Response {
         $categories = $repository->findOneBy(["id" => $id]);
         $form = $this->createForm(CategoriesType::class, $categories);
 
@@ -96,16 +126,16 @@ class CategoriesController extends AbstractController
 
 
     #[Route('/categories/suppression/{id}', name: 'categories.delete', methods: ['GET'])]
-    public function delete(EntityManagerInterface $manager, Categories $categories) : Response
-    {   
+    public function delete(EntityManagerInterface $manager, Categories $categories): Response
+    {
 
-        if(!$categories){
+        if (!$categories) {
 
             $this->addFlash(
                 'success',
                 'Votre catégorie n\'a pas été trouvé'
             );
-    
+
             return $this->redirectToRoute('categories.index');
         }
         $manager->remove($categories);

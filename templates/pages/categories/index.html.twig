@@ -3,46 +3,57 @@
 {% block title %}Mes Catégories
 {% endblock %}
 
-
 {% block body %}
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h1 class="display-5 fw-bold text-dark">Mes Catégories</h1>
+            <p class="text-muted">
+                Gérez vos catégories de manière simple et intuitive. Ajoutez, modifiez ou supprimez-les en quelques clics.
+            </p>
+            <a href="{{ path('categories.new') }}" class="btn btn-primary btn-lg px-4 shadow-sm">
+                <i class="fas fa-plus-circle me-2"></i>Créer une catégorie
+            </a>
+        </div>
 
-	<div class="container mt-4">
-		<h1>
-			Mes Catégories
-		</h1>
-
-		<a href="{{ path('categories.new') }}" class="btn btn-primary">
-			Creer une catégorie
-		</a>
-
-		<table class="table table-hover">
-			<thead>
-				<tr>
-					<th scope"col">Numéro</th>
-					<th scope"col">Nom</th>
-					<th scope"col">Edition</th>
-					<th scope"col">Suppression</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for categorie in categories %}
-					<tr class="table-primary">
-						<th scope="row">{{ categorie.id }}</th>
-						<td>{{ categorie.name}}</td>
-						<td>
-							<a href="{{ path('categories.edit', { id: categorie.id }) }}" class="btn btn-info">
-								Modifier</a>
-						</td>
-						<td>
-							<a href="{{ path('categories.delete', { id: categorie.id }) }}" class="btn btn-warning">
-								Supprimer</a>
-						</td>
-
-
-					</tr>
-
-				{% endfor %}
-			</tbody>
-		</table>
-	</div>
+        <div class="card shadow-sm border-0">
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table class="table align-middle text-center">
+                        <thead class="table-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Nom</th>
+                                <th scope="col">Édition</th>
+                                <th scope="col">Suppression</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for categorie in categories %}
+                                <tr>
+                                    <td class="fw-bold">{{ categorie.id }}</td>
+                                    <td>{{ categorie.name }}</td>
+                                    <td>
+                                        <a href="{{ path('categories.edit', { id: categorie.id }) }}" class="btn btn-outline-info btn-sm">
+                                            <i class="fas fa-pen"></i> Modifier
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="{{ path('categories.delete', { id: categorie.id }) }}" class="btn btn-outline-danger btn-sm">
+                                            <i class="fas fa-trash"></i> Supprimer
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% else %}
+                                <tr>
+                                    <td colspan="4" class="text-muted fst-italic">Aucune catégorie disponible pour le moment.</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}

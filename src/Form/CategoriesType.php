@@ -34,7 +34,7 @@ class CategoriesType extends AbstractType
         
         ->add('submit', SubmitType::class, [
             'attr' => [
-                'class' => 'bin btn-primary mt-4'
+                'class' => 'bin btn-primary mt-4 pr-4 pl-4 pt-2 pb-2'
             ],
             'label' => 'Créer ma catégorie'
         ]);
